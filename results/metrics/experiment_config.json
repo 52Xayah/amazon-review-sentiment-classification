@@ -1,0 +1,56 @@
+{
+    "project": "Amazon Review Sentiment Classification",
+    "dataset": {
+        "name": "Amazon Fine Food Reviews",
+        "source": "Kaggle - SNAP",
+        "raw_file": "data/raw/Reviews.csv",
+        "cleaned_file": "data/processed/reviews_cleaned.csv",
+        "num_classes": 5,
+        "label": "Score",
+        "cleaning": [
+            "Remove rows with missing Text or Score",
+            "Remove empty review texts",
+            "Remove duplicate UserId, ProductId and Text records"
+        ]
+    },
+    "data_split": {
+        "train_test_ratio": "80:20",
+        "random_state": 42,
+        "stratify": true
+    },
+    "logistic_regression": {
+        "feature_extraction": "TF-IDF",
+        "max_features": 20000,
+        "ngram_range": [
+            1,
+            2
+        ],
+        "min_df": 3,
+        "max_df": 0.95,
+        "sublinear_tf": true,
+        "max_iter": 1000,
+        "class_weight": "balanced",
+        "solver": "lbfgs"
+    },
+    "lstm": {
+        "tokenizer_num_words": 20000,
+        "max_sequence_length": 100,
+        "embedding_dim": 128,
+        "lstm_units": 64,
+        "lstm_dropout": 0.2,
+        "recurrent_dropout": 0.0,
+        "dropout": 0.3,
+        "optimizer": "Adam",
+        "loss": "sparse_categorical_crossentropy",
+        "epochs": 5,
+        "batch_size": 256,
+        "validation_split": 0.1
+    },
+    "environment": {
+        "python": "3.12.10",
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scikit_learn": "1.9.1",
+        "tensorflow": "2.21.0"
+    }
+}
